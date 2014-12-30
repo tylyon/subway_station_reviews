@@ -14,7 +14,7 @@ class StationsController < ApplicationController
   def create
     @station = Station.new(station_params)
     if @station.save
-      flash[:notice]="Station created."
+      flash[:notice] = "Station created."
       redirect_to station_path(@station)
     else
       @errors = @station.errors.full_messages
@@ -22,9 +22,23 @@ class StationsController < ApplicationController
     end
   end
 
+  def edit
+    @station = Station.find(params[:id])
+  end
 
+  def update
+    @station = Station.find(params[:id])
+    if @station.update(station_params)
+      flash[:notice] = "Station edited."
+      redirect_to @station
+    else
+      @errors = @station.errors.full_messages
+      render "edit"
+    end
+  end
 
   private
+
   def station_params
     params.require(:station).permit(:name, :address)
   end
