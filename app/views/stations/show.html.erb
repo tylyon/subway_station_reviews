@@ -8,3 +8,20 @@
     </li>
   <% end %>
 </ul>
+
+<%= form_for [@station, @review || @station.reviews.new] do |f| %>
+<div>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+</div>
+
+<div>
+  <%= f.label :rating %>
+  <%= f.select(:rating, %w[1 2 3 4], {prompt: 'Rating'}) %>
+</div>
+
+<div>
+  <%= f.submit "Submit" %>
+</div>
+
+<% end %>
