@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'admin creates station', %Q{
+feature "admin creates station", %(
   As an admin,
   I want to add a new station,
   so that people can post reviews on it.
@@ -9,10 +9,11 @@ feature 'admin creates station', %Q{
   { } Admins have access to an edit page
   { } On the edit page they can enter a new line, address, or station name
   { } When they click submit, they are taken to the updated station page
-  { } If they enter invalid information, they get an error message and are returned to the edit page.
+  { } If they enter invalid information, they get an error message and are
+      returned to the edit page.
 
-  } do
-    scenario 'admin edits a station' do
+  }) do
+    scenario "admin edits a station" do
       station = FactoryGirl.create(:station)
       visit edit_station_path(station)
 
@@ -25,7 +26,7 @@ feature 'admin creates station', %Q{
       expect(page).to have_content("Washington Street and Summer Street")
     end
 
-    scenario 'admin edits a station with blanks' do
+    scenario "admin edits a station with blanks" do
       station = FactoryGirl.create(:station)
       visit edit_station_path(station)
 

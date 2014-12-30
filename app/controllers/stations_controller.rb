@@ -33,7 +33,7 @@ class StationsController < ApplicationController
       redirect_to @station
     else
       @errors = @station.errors.full_messages
-      render 'edit'
+      render "edit"
     end
   end
 
