@@ -12,5 +12,5 @@ FactoryGirl.define do
     line_id 3
     address "123 fake st."
   end
-  
+
 end
