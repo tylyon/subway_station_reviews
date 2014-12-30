@@ -29,4 +29,6 @@ feature 'admin creates station', %Q{
       click_on "Submit"
       expect(page).to have_content("can't be blank")
     end
+
+    scenario 'non-admin tries to create a station' 
   end
