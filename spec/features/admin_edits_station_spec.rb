@@ -34,7 +34,8 @@ feature "admin creates station", %(
       fill_in "Address", with: ""
 
       click_on "Submit"
-      expect(page).to have_content("can't be blank")
+      expect(page).to have_content("Name can't be blank")
+      expect(page).to have_content("Address can't be blank")
     end
 
   end

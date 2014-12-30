@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'admin creates station', %Q{
+feature "admin creates station", %Q{
   As an admin,
   I want to add a new station,
   so that people can post reviews on it.
@@ -12,7 +12,7 @@ feature 'admin creates station', %Q{
   { } Only an admin can create a station
 
   } do
-    scenario 'admin creates a station' do
+    scenario "admin creates a station" do
       visit new_station_path
       fill_in "Name", with: "Downtown Crossing"
       fill_in "Address", with: "Washington Street and Summer Street"
@@ -23,12 +23,12 @@ feature 'admin creates station', %Q{
       expect(page).to have_content("Washington Street and Summer Street")
     end
 
-    scenario 'admin does not fill in inputs' do
+    scenario "admin does not fill in inputs" do
       visit new_station_path
 
       click_on "Submit"
       expect(page).to have_content("can't be blank")
     end
 
-    scenario 'non-admin tries to create a station'
+    scenario "non-admin tries to create a station"
   end
