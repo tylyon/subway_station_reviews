@@ -1,0 +1,9 @@
+<%= @station.address %>
+<ul>
+  <% @station.reviews.each do |review| %>
+    <li>
+      <%= review.description %>
+      <%= review.rating %>
+    </li>
+  <% end %>
+</ul>
