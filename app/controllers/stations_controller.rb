@@ -1,5 +1,4 @@
 class StationsController < ApplicationController
-
   def index
     @stations = Station.all
   end
@@ -7,5 +6,4 @@ class StationsController < ApplicationController
   def show
     @station = Station.find(params[:id])
   end
-
 end
