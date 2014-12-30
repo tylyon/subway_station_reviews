@@ -1,3 +1,3 @@
 class Line < ActiveRecord::Base
-  has_many :stations
+  has_many :stations, through: :connections
 end
