@@ -9,8 +9,14 @@ FactoryGirl.define do
 
   factory :station do
     name "name"
-    line_id 3
     address "123 fake st."
+  end
+
+  factory :review do
+    user
+    station
+    description "description"
+    rating 4
   end
 
 end
