@@ -30,5 +30,5 @@ feature 'admin creates station', %Q{
       expect(page).to have_content("can't be blank")
     end
 
-    scenario 'non-admin tries to create a station' 
+    scenario 'non-admin tries to create a station'
   end

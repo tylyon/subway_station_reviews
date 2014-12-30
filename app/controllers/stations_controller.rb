@@ -22,6 +22,21 @@ class StationsController < ApplicationController
     end
   end
 
+  def edit
+    @station = Station.find(params[:id])
+  end
+
+  def update
+    @station = Station.find(params[:id])
+    if @station.update(station_params)
+      flash[:notice]="Station edited."
+      redirect_to @station
+    else
+      @errors = @station.errors.full_messages
+      render edit_station_path(@station)
+    end
+  end
+
 
 
   private
