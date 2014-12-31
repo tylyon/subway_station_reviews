@@ -8,3 +8,5 @@
     </li>
   <% end %>
 </ul>
+
+<%= link_to "Delete", station_path(@station), method: :delete, data: { confirm: 'Are you sure?' } %>
