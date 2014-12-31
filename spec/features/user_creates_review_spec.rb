@@ -40,7 +40,7 @@ feature "user creates review", %Q{
 
     end
 
-    scenario "User" cannot submit blank rating do
+    scenario "User cannot submit blank rating" do
       fill_in "Description", with: "Great place to live and work"
 
       click_button "Submit"
