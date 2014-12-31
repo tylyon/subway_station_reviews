@@ -37,7 +37,6 @@ class ReviewsController < ApplicationController
   end
 
   private
-  
   def parent
     @station ||= Station.find(params[:station_id])
   end
@@ -45,5 +44,4 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:description, :rating)
   end
-  
 end
