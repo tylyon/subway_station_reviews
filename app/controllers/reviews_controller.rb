@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
     else
       @station = parent
       @errors = @review.errors.full_messages
-      render 'reviews/edit'
+      render "reviews/edit"
     end
   end
 
@@ -27,7 +27,7 @@ class ReviewsController < ApplicationController
       flash[:notice] = "Review created"
       redirect_to parent
     else
-      render 'stations/show'
+      render "stations/show"
     end
   end
 
