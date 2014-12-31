@@ -54,7 +54,7 @@ feature "admin edits station", %(
       expect(page).to have_content("Only admins can edit stations")
     end
 
-    scenario "non-user tries to edit a station" do  
+    scenario "non-user tries to edit a station" do
       station = FactoryGirl.create(:station)
       visit edit_station_path(station)
 
