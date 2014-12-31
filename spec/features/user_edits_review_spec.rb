@@ -5,57 +5,42 @@ feature 'user edits review', %Q{
   I want to edit my review
   So I can update my review if something changes
 } do
-  scenario 'Editing a review' do
-    user = FactoryGirl.create(:user)
-    review = FactoryGirl.create(:review)
-    station = FactoryGirl.create(:station)
-    review = Review.new(description: review.description, rating: review.rating, station_id: station.id, user_id: user.id)
-    review.save
+    before(:each) do
+        user = FactoryGirl.create(:user)
+        review = FactoryGirl.create(:review)
+        station = FactoryGirl.create(:station)
+        review = Review.new(description: review.description, rating: review.rating, station_id: station.id, user_id: user.id)
+        review.save
 
-    visit new_user_session_path
+        visit new_user_session_path
 
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+        fill_in 'Email', with: user.email
+        fill_in 'Password', with: user.password
 
-    click_button 'Log in'
+        click_button 'Log in'
 
-    visit station_path(station)
-    click_link 'Edit'
+        visit station_path(station)
+        click_link 'Edit'
+    end
 
-    fill_in 'Description', with: "Great place to live and work"
-    select 4, from: 'Rating'
+    scenario 'Editing a review' do
+        fill_in 'Description', with: "Great place to live and work"
+        select 4, from: 'Rating'
 
-    click_button 'Update'
+        click_button 'Update'
 
-    expect(page).to have_content('Great place to live and work')
-    expect(page).to have_content('4')
-    expect(page).to have_content('Review edited')
-  end
+        expect(page).to have_content('Great place to live and work')
+        expect(page).to have_content('4')
+        expect(page).to have_content('Review edited')
+    end
 
-  scenario 'User cannot submit empty edit' do
-    user = FactoryGirl.create(:user)
-    review = FactoryGirl.create(:review)
-    station = FactoryGirl.create(:station)
-    review = Review.new(description: review.description, rating: review.rating, station_id: station.id, user_id: user.id)
-    review.save
+    scenario 'User cannot submit empty edit' do
+        fill_in 'Description', with: ""
+        select 4, from: 'Rating'
 
-    visit new_user_session_path
+        click_button 'Update'
 
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    click_button 'Log in'
-
-    visit station_path(station)
-
-    click_link 'Edit'
-
-    fill_in 'Description', with: ""
-    select 4, from: 'Rating'
-
-    click_button 'Update'
-
-    expect(page).to have_content('4')
-    expect(page).to have_content("Description can't be blank")
-  end
+        expect(page).to have_content('4')
+        expect(page).to have_content("Description can't be blank")
+    end
 end

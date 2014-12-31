@@ -1,51 +1,49 @@
 class ReviewsController < ApplicationController
 
   def show
-    redirect_to station_path
+    redirect_to parent
   end
 
   def update
     @review = Review.find(params[:id])
-    @station = Station.find(params[:station_id])
     if @review.update_attributes(params[:review].permit(:description, :rating))
       flash[:notice]="Review edited"
-      redirect_to station_path(params[:station_id])
+      redirect_to parent
     else
+      @station = parent
       @errors = @review.errors.full_messages
       render 'reviews/edit'
     end
   end
 
   def new
-    @station = Station.find(params[:station_id])
-    @review = @station.reviews.new
+    @review = parent.reviews.new(review_params)
   end
 
   def create
-    @station = Station.find(params[:station_id])
-    @review = Review.new(review_params)
-    @review.station_id = @station.id
+    @review = parent.reviews.new(review_params)
     @review.user_id = current_user.id
 
     if @review.save
       flash[:notice]="Review created"
-      redirect_to station_path(@station.id)
+      redirect_to parent
     else
       render 'stations/show'
     end
   end
 
   def edit
-    @station = Station.find(params[:station_id])
+    @station = parent
     @review = Review.find(params[:id])
   end
 
   private
+    def parent
+      @station ||= Station.find(params[:station_id])
+    end
 
-  def review_params
-    params.require(:review).permit(:description, :rating)
-  end
-
-
+    def review_params
+      params.require(:review).permit(:description, :rating)
+    end
 
 end

@@ -5,7 +5,7 @@ feature 'user creates review', %Q{
   I want to create a review
   So I can inform other people about a station
   } do
-    scenario 'Creating a review' do
+    before(:each) do
       user = FactoryGirl.create(:user)
       station = FactoryGirl.create(:station)
 
@@ -17,7 +17,9 @@ feature 'user creates review', %Q{
       click_button 'Log in'
 
       visit station_path(station)
+    end
 
+    scenario 'Creating a review' do
       fill_in 'Description', with: "Great place to live and work"
       select '4', :from => "review[rating]"
 
@@ -29,18 +31,6 @@ feature 'user creates review', %Q{
     end
 
     scenario 'User cannot submit blank submission' do
-      user = FactoryGirl.create(:user)
-      station = FactoryGirl.create(:station)
-
-      visit new_user_session_path
-
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
-
-      click_button 'Log in'
-
-      visit station_path(station)
-
       select '4', :from => "review[rating]"
 
       click_button 'Submit'
@@ -51,18 +41,6 @@ feature 'user creates review', %Q{
     end
 
     scenario 'User cannot submit blank rating' do
-      user = FactoryGirl.create(:user)
-      station = FactoryGirl.create(:station)
-
-      visit new_user_session_path
-
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
-
-      click_button 'Log in'
-
-      visit station_path(station)
-
       fill_in 'Description', with: "Great place to live and work"
 
       click_button 'Submit'
@@ -72,18 +50,6 @@ feature 'user creates review', %Q{
     end
 
     scenario 'User cannot submit blank form' do
-      user = FactoryGirl.create(:user)
-      station = FactoryGirl.create(:station)
-
-      visit new_user_session_path
-
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: user.password
-
-      click_button 'Log in'
-
-      visit station_path(station)
-
       click_button 'Submit'
 
       expect(page).to have_content("Description can't be blank")
