@@ -5,19 +5,27 @@ feature 'user edits review', %Q{
   I want to edit my review
   So I can update my review if something changes
 } do
-  scenario 'Editing a review' do
+  scenario 'Editing a review', focus: true do
     user = FactoryGirl.create(:user)
     review = FactoryGirl.create(:review)
     station = FactoryGirl.create(:station)
+    review = Review.new(description: review.description, rating: review.rating, station_id: station.id, user_id: user.id)
+    review.save
+
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+
+    click_button 'Log in'
 
     visit station_path(station)
-
-    click_button 'Edit'
+    click_link 'Edit'
 
     fill_in 'Description', with: "Great place to live and work"
-    fill_in 'Rating', with: 4
+    select 4, from: 'Rating'
 
-    click_button 'Submit'
+    click_button 'Update'
 
     expect(page).to have_content('Great place to live and work')
     expect(page).to have_content('4')
@@ -29,9 +37,16 @@ feature 'user edits review', %Q{
     review = FactoryGirl.create(:review)
     station = FactoryGirl.create(:station)
 
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+
+    click_button 'Log in'
+
     visit station_path(station)
 
-    click_button 'Edit'
+    click_link 'Edit'
 
     fill_in 'Description', with: ""
     fill_in 'Rating', with: 4
@@ -39,6 +54,6 @@ feature 'user edits review', %Q{
     click_button 'Submit'
 
     expect(page).to have_content('4')
-    expect(page).to have_content('Description can\'t be blank')
+    expect(page).to have_content("Description can't be blank")
   end
 end

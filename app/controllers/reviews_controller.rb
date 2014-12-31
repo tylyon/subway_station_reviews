@@ -4,6 +4,14 @@ class ReviewsController < ApplicationController
     redirect_to station_path
   end
 
+  def update
+    @review = Review.find(params[:id])
+    if @review.update_attributes(params[:review].permit(:description, :rating))
+      flash[:notice]="Review edited"
+      redirect_to station_path(params[:station_id])
+    end
+  end
+
   def new
     @station = Station.find(params[:station_id])
     @review = @station.reviews.new
@@ -13,18 +21,25 @@ class ReviewsController < ApplicationController
     @station = Station.find(params[:station_id])
     @review = Review.new(review_params)
     @review.station_id = @station.id
+    @review.user_id = current_user.id
 
     if @review.save
+      flash[:notice]="Review created"
       redirect_to station_path(@station.id)
     else
-      render :new
+      render 'stations/show'
     end
+  end
+
+  def edit
+    @station = Station.find(params[:station_id])
+    @review = Review.find(params[:id])
   end
 
   private
 
   def review_params
-    params.require(:review).permit(:description, :rating, :user_id, :station_id)
+    params.require(:review).permit(:description, :rating)
   end
 
 

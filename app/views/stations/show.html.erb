@@ -1,19 +1,30 @@
 <%= @station.name %>
 <%= @station.address %>
+
+<% if !@review.nil? %>
+<% if @review.errors.any? %>
+<% @review.errors.full_messages.each do |error| %>
+<%= error %>
+<% end %>
+<% end %>
+<% end %>
+
 <ul>
-  <% @station.reviews.each do |review| %>
-    <li>
-      <%= review.description %>
-      <%= review.rating %>
-    </li>
+  <% @reviews.each do |review| %>
+  <li>
+    <%= review.description %>
+    <%= review.rating %>
+    <%= link_to "Edit", edit_station_review_path(@station, review) %>
+  </li>
   <% end %>
 </ul>
 
-<%= form_for [@station, @review || @station.reviews.new] do |f| %>
+<%= form_for [@station, @review] do |f| %>
 <div>
   <%= f.label :description %>
   <%= f.text_area :description %>
 </div>
+
 
 <div>
   <%= f.label :rating %>
