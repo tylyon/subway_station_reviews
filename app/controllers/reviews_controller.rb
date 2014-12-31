@@ -1,5 +1,4 @@
 class ReviewsController < ApplicationController
-
   def show
     redirect_to parent
   end
