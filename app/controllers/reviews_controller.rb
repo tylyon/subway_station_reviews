@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
   def update
     @review = Review.find(params[:id])
     if @review.update_attributes(params[:review].permit(:description, :rating))
-      flash[:notice]="Review edited"
+      flash[:notice] = "Review edited"
       redirect_to parent
     else
       @station = parent
@@ -24,7 +24,7 @@ class ReviewsController < ApplicationController
     @review.user_id = current_user.id
 
     if @review.save
-      flash[:notice]="Review created"
+      flash[:notice] = "Review created"
       redirect_to parent
     else
       render 'stations/show'
