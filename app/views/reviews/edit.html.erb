@@ -1,3 +1,11 @@
+<% if @review.errors.any? %>
+<div class="errors">
+<% @review.errors.full_messages.each do |error| %>
+<%= error %>!
+<% end %>
+</div>
+<% end %>
+
 <%= form_for [@station, @review] do |f| %>
 <div>
   <%= f.label :description %>

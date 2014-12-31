@@ -6,9 +6,13 @@ class ReviewsController < ApplicationController
 
   def update
     @review = Review.find(params[:id])
+    @station = Station.find(params[:station_id])
     if @review.update_attributes(params[:review].permit(:description, :rating))
       flash[:notice]="Review edited"
       redirect_to station_path(params[:station_id])
+    else
+      @errors = @review.errors.full_messages
+      render 'reviews/edit'
     end
   end
 
