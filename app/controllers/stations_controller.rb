@@ -30,12 +30,20 @@ class StationsController < ApplicationController
   end
 
   def edit
-    @station = Station.find(params[:id])
+    if current_user.nil? || current_user.role != "admin"
+      flash[:notice] = "Only admins can edit stations"
+      redirect_to stations_path
+    else
+      @station = Station.find(params[:id])
+    end
   end
 
   def update
     @station = Station.find(params[:id])
-    if @station.update(station_params)
+    if current_user.nil? || current_user.role != "admin"
+      flash[:notice] = "Only admins can edit stations"
+      redirect_to stations_path
+    elsif @station.update(station_params)
       flash[:notice] = "Station edited."
       redirect_to @station
     else
@@ -46,9 +54,14 @@ class StationsController < ApplicationController
 
   def destroy
     @station = Station.find(params[:id])
-    @station.destroy
-    flash[:notice] = "Station deleted"
-    redirect_to stations_path
+    if current_user.nil? || current_user.role != "admin"
+      flash[:notice] = "Only admins can delete stations"
+      redirect_to stations_path
+    else
+      @station.destroy
+      flash[:notice] = "Station deleted"
+      redirect_to stations_path
+    end
   end
 
   private

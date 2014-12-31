@@ -47,7 +47,7 @@ feature "admin creates station", %Q{
       sign_in_as(user)
 
       visit new_station_path
-      
+
       expect(page).to have_content("Only admins can create stations")
     end
 
