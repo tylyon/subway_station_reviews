@@ -11,4 +11,8 @@ Rails.application.routes.draw do
     :update,
     :destroy
   ]
+  namespace :admin do
+    resources :stations
+  end
+
 end

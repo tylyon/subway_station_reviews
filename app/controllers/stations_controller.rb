@@ -9,11 +9,18 @@ class StationsController < ApplicationController
 
   def new
     @station = Station.new
+    if current_user.nil? || current_user.role != "admin"
+      flash[:notice] = "Only admins can create stations"
+      redirect_to stations_path
+    end
   end
 
   def create
     @station = Station.new(station_params)
-    if @station.save
+    if current_user.nil? || current_user.role != "admin"
+      flash[:notice] = "Only admins can create stations"
+      redirect_to stations_path
+    elsif @station.save
       flash[:notice] = "Station created."
       redirect_to station_path(@station)
     else
