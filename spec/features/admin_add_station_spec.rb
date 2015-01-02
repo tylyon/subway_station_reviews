@@ -16,7 +16,7 @@ feature "admin creates station", %Q{
       admin = FactoryGirl.create(:admin)
       sign_in_as(admin)
 
-      visit new_station_path
+      visit new_admin_station_path
       fill_in "Name", with: "Downtown Crossing"
       fill_in "Address", with: "Washington Street and Summer Street"
 
@@ -30,14 +30,14 @@ feature "admin creates station", %Q{
       admin = FactoryGirl.create(:admin)
       sign_in_as(admin)
 
-      visit new_station_path
+      visit new_admin_station_path
 
       click_on "Submit"
       expect(page).to have_content("can't be blank")
     end
 
     scenario "non-user tries to create a station" do
-      visit new_station_path
+      visit new_admin_station_path
 
       expect(page).to have_content("Only admins can create stations")
     end
@@ -46,7 +46,7 @@ feature "admin creates station", %Q{
       user = FactoryGirl.create(:user)
       sign_in_as(user)
 
-      visit new_station_path
+      visit new_admin_station_path
 
       expect(page).to have_content("Only admins can create stations")
     end

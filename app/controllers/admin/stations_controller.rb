@@ -22,10 +22,10 @@ class Admin::StationsController < ApplicationController
       redirect_to stations_path
     elsif @station.save
       flash[:notice] = "Station created."
-      redirect_to station_path(@station)
+      redirect_to admin_station_path(@station)
     else
       @errors = @station.errors.full_messages
-      render new_station_path
+      render new_admin_station_path
     end
   end
 

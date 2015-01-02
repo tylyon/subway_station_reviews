@@ -5,11 +5,10 @@ Rails.application.routes.draw do
   resources :stations, only: [
     :index,
     :show,
-    :new,
-    :create,
+    # :new,
+    # :create,
     :edit,
     :update,
-    # :destroy
   ]
   namespace :admin do
     resources :stations
