@@ -1,11 +1,9 @@
 <%= @station.name %>
 <%= @station.address %>
 
-<% if !@review.nil? %>
 <% if @review.errors.any? %>
 <% @review.errors.full_messages.each do |error| %>
 <%= error %>
-<% end %>
 <% end %>
 <% end %>
 
