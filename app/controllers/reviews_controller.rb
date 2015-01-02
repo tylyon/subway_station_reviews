@@ -44,6 +44,7 @@ class ReviewsController < ApplicationController
   end
 
   private
+  
   def parent
     @station ||= Station.find(params[:station_id])
   end
