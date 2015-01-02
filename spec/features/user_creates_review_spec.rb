@@ -31,7 +31,7 @@ feature "user creates review", %{
     end
 
     scenario "User cannot submit blank submission" do
-      select "4", :from => "review[rating]"
+      select "4", from: "review[rating]"
 
       click_button "Submit"
 
