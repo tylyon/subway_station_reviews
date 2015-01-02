@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     :create,
     :edit,
     :update,
-    :destroy
+    # :destroy
   ]
   namespace :admin do
     resources :stations
