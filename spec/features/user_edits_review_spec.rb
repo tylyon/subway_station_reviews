@@ -9,10 +9,11 @@ feature "user edits review", %{
     user = FactoryGirl.create(:user)
     review = FactoryGirl.create(:review)
     station = FactoryGirl.create(:station)
-    review = Review.new(description: review.description, 
-    rating: review.rating, 
-    station_id: station.id, 
-    user_id: user.id)
+    review = Review.new(
+      description: review.description, 
+      rating: review.rating, 
+      station_id: station.id, 
+      user_id: user.id)
     review.save
 
     visit new_user_session_path
