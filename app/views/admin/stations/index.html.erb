@@ -1,0 +1,3 @@
+<% @stations.each do |station| %>
+  <%= link_to station.name, station_path(station.id) %>
+<% end %>

@@ -13,11 +13,34 @@ feature "admin deletes station", %(
 
   ) do
     scenario "admin deletes a station" do
+      admin = FactoryGirl.create(:admin)
+      sign_in_as(admin)
+
       station = FactoryGirl.create(:station)
-      visit station_path(station)
+      visit admin_station_path(station)
       click_on "Delete"
 
       expect(page).to have_content("Station deleted")
       expect(page).not_to have_content(station.name)
+    end
+
+    scenario "non-admin tries to delete a station" do
+      user = FactoryGirl.create(:user)
+      sign_in_as(user)
+
+      station = FactoryGirl.create(:station)
+      visit admin_station_path(station)
+      click_on "Delete"
+
+      expect(page).to have_content("Only admins can delete stations")
+    end
+
+    def sign_in_as(user)
+      visit new_user_session_path
+
+      fill_in "Email", with: user.email
+      fill_in "Password", with: user.password
+
+      click_button "Log in"
     end
   end

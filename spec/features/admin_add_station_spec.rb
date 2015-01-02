@@ -13,7 +13,10 @@ feature "admin creates station", %Q{
 
   } do
     scenario "admin creates a station" do
-      visit new_station_path
+      admin = FactoryGirl.create(:admin)
+      sign_in_as(admin)
+
+      visit new_admin_station_path
       fill_in "Name", with: "Downtown Crossing"
       fill_in "Address", with: "Washington Street and Summer Street"
 
@@ -24,11 +27,36 @@ feature "admin creates station", %Q{
     end
 
     scenario "admin does not fill in inputs" do
-      visit new_station_path
+      admin = FactoryGirl.create(:admin)
+      sign_in_as(admin)
+
+      visit new_admin_station_path
 
       click_on "Submit"
       expect(page).to have_content("can't be blank")
     end
 
-    scenario "non-admin tries to create a station"
+    scenario "non-user tries to create a station" do
+      visit new_admin_station_path
+
+      expect(page).to have_content("Only admins can create stations")
+    end
+
+    scenario "non-admin tries to create a station" do
+      user = FactoryGirl.create(:user)
+      sign_in_as(user)
+
+      visit new_admin_station_path
+
+      expect(page).to have_content("Only admins can create stations")
+    end
+
+    def sign_in_as(user)
+      visit new_user_session_path
+
+      fill_in "Email", with: user.email
+      fill_in "Password", with: user.password
+
+      click_button "Log in"
+    end
   end

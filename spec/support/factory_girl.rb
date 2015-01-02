@@ -7,6 +7,10 @@ FactoryGirl.define do
     password_confirmation "password"
   end
 
+  factory :admin, parent: :user do
+    role "admin"
+  end
+
   factory :station do
     name "name"
     address "123 fake st."
