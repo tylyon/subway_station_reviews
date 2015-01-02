@@ -18,7 +18,7 @@ feature "admin edits station", %(
       sign_in_as(admin)
 
       station = FactoryGirl.create(:station)
-      visit edit_station_path(station)
+      visit edit_admin_station_path(station)
 
       fill_in "Name", with: "Downtown Crossing"
       fill_in "Address", with: "Washington Street and Summer Street"
@@ -34,7 +34,7 @@ feature "admin edits station", %(
       sign_in_as(admin)
 
       station = FactoryGirl.create(:station)
-      visit edit_station_path(station)
+      visit edit_admin_station_path(station)
 
       fill_in "Name", with: ""
       fill_in "Address", with: ""
@@ -49,14 +49,14 @@ feature "admin edits station", %(
       sign_in_as(user)
 
       station = FactoryGirl.create(:station)
-      visit edit_station_path(station)
+      visit edit_admin_station_path(station)
 
       expect(page).to have_content("Only admins can edit stations")
     end
 
     scenario "non-user tries to edit a station" do
       station = FactoryGirl.create(:station)
-      visit edit_station_path(station)
+      visit edit_admin_station_path(station)
 
       expect(page).to have_content("Only admins can edit stations")
     end
