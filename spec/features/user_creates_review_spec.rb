@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "user creates review", %Q{
+feature "user creates review", %{
   As a signed in user
   I want to create a review
   So I can inform other people about a station
