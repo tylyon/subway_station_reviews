@@ -21,7 +21,7 @@ feature "user creates review", %{
 
     scenario "Creating a review" do
       fill_in "Description", with: "Great place to live and work"
-      select "4", :from => "review[rating]"
+      select "4", from: "review[rating]"
 
       click_button "Submit"
 
