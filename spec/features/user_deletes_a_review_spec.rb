@@ -13,27 +13,20 @@ feature "user deletes review", %{
   [ ] I can't delete anyone else's reviews
   } do
     before(:each) do
-      @station = FactoryGirl.create(:station)
-      user = FactoryGirl.create(:user)
-      review = FactoryGirl.create(:review)
-      review = Review.new(description: review.description,
-        rating: review.rating,
-        station_id: @station.id,
-        user_id: user.id)
-      review.save
+      @review = FactoryGirl.create(:review)
       visit new_user_session_path
 
-      fill_in "Email", with: user.email
-      fill_in "Password", with: user.password
+      fill_in "Email", with: @review.user.email
+      fill_in "Password", with: @review.user.password
 
       click_button "Log in"
 
-      visit station_path(@station)
+      visit station_path(@review.station)
     end
 
     scenario "user cannot delete a review if not signed in" do
       click_link "Sign Out"
-      visit station_path(@station)
+      visit station_path(@review.station)
       expect(page).to_not have_button("Delete")
     end
 
@@ -41,33 +34,12 @@ feature "user deletes review", %{
       expect(page).to have_button("Delete")
     end
 
-    scenario "user is prompted to confirm deletion when clicking delete button" do
-      click_button "Delete"
-
-      expect(page).to have_content(
-        "Are you sure you want to delete this review?")
-    end
-
     scenario "user deletes review and is taken back to station page" do
-      review_description = review.description
+      review_description = @review.description
       click_button "Delete"
 
-      expect(page).to have_content(
-        "Are you sure you want to delete this review?")
-      click_button "Yes"
       expect(page).to_not have_content(review_description)
-      expect(Review.count).to_eq(0)
-    end
-
-    scenario "user clicks 'no' and is taken back to station page" do
-      review_description = review.description
-      click_button "Delete"
-
-      expect(find("#delete-confirmation-popup")).to have_content(
-        "Are you sure you want to delete this review?")
-      click_button "No"
-      expect(page).to have_content(review_description)
-      expect(Review.count).to_eq(1)
+      expect(Review.count).to eq 0
     end
 
     scenario "user cannot delete other user's reviews" do
@@ -79,6 +51,7 @@ feature "user deletes review", %{
         station_id: station2.id,
         user_id: user2.id)
       review2.save
+      station2.save
 
       visit station_path(station2)
       expect(page).to_not have_button("Delete")

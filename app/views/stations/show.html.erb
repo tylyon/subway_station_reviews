@@ -18,7 +18,10 @@
     <%= link_to "Edit", edit_station_review_path(@station, review) %>
     <% if !@user.nil? %>
     <% if review.user_id == @user.id %>
-    <%= button_to "Delete", station_review_path(@station, review), method: :delete,
+    <%= button_to "Delete",
+    review_path(review),
+    method: :delete,
+    action: :destroy,
     data: { confirm: "Are you sure you want to delete this review?" }%>
     <% end %>
     <% end %>
