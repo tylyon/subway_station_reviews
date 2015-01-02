@@ -2,9 +2,9 @@
 <%= @station.address %>
 
 <% if @review.errors.any? %>
-<% @review.errors.full_messages.each do |error| %>
-<%= error %>
-<% end %>
+  <% @review.errors.full_messages.each do |error| %>
+    <%= error %>
+  <% end %>
 <% end %>
 
 <% if !@reviews.nil? %>
