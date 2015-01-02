@@ -7,11 +7,11 @@ feature "user deletes review", %{
 
   Acceptance Criteria:
   [ ] I must be logged in
-  [ ] Next to each of my reviews on a station page 
+  [ ] Next to each of my reviews on a station page
       I see a link to delete my review
-  [ ] If I click on this link I am prompted 
+  [ ] If I click on this link I am prompted
       whether I want to delete the review
-  [ ] If I click yes, my review is deleted 
+  [ ] If I click yes, my review is deleted
       and I am taken back to the station page
   [ ] I can't delete anyone else's reviews
   } do
@@ -50,9 +50,9 @@ feature "user deletes review", %{
       user2 = FactoryGirl.create(:user)
       review2 = FactoryGirl.create(:review)
       review2 = Review.new(description: review2.description,
-                                        rating: review2.rating,
-                                        station_id: station2.id,
-                                        user_id: user2.id)
+        rating: review2.rating,
+        station_id: station2.id,
+        user_id: user2.id)
       review2.save
       station2.save
 
@@ -60,12 +60,3 @@ feature "user deletes review", %{
       expect(page).to_not have_button("Delete")
     end
   end
-
-
-
-
-
-
-
-
-
