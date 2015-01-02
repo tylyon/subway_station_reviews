@@ -14,9 +14,9 @@ feature "user edits review", %{
     station_id: station.id, 
     user_id: user.id)
     review.save
-      
+
     visit new_user_session_path
-      
+
     fill_in "Email", with: user.email
     fill_in "Password", with: user.password
 
@@ -42,7 +42,7 @@ feature "user edits review", %{
     select 4, from: "Rating"
 
     click_button "Update"
-        
+
     expect(page).to have_content("4")
     expect(page).to have_content("Description can't be blank")
   end
