@@ -49,7 +49,8 @@ feature "user deletes review", %{
       station2 = FactoryGirl.create(:station)
       user2 = FactoryGirl.create(:user)
       review2 = FactoryGirl.create(:review)
-      review2 = Review.new(description: review2.description,
+      review2 = Review.new(
+        description: review2.description,
         rating: review2.rating,
         station_id: station2.id,
         user_id: user2.id)
