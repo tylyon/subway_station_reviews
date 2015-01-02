@@ -7,9 +7,12 @@ feature "user deletes review", %{
 
   Acceptance Criteria:
   [ ] I must be logged in
-  [ ] Next to each of my reviews on a station page I see a link to delete my review
-  [ ] If I click on this link I am prompted whether I want to delete the review
-  [ ] If I click yes, my review is deleted and I am taken back to the station page
+  [ ] Next to each of my reviews on a station page 
+      I see a link to delete my review
+  [ ] If I click on this link I am prompted 
+      whether I want to delete the review
+  [ ] If I click yes, my review is deleted 
+      and I am taken back to the station page
   [ ] I can't delete anyone else's reviews
   } do
     before(:each) do
