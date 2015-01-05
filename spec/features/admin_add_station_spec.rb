@@ -17,6 +17,7 @@ feature "admin creates station", %Q{
       sign_in_as(admin)
 
       visit new_admin_station_path
+
       fill_in "Name", with: "Downtown Crossing"
       fill_in "Address", with: "Washington Street and Summer Street"
 
