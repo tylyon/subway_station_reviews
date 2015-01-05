@@ -39,7 +39,7 @@ feature "admin creates station", %Q{
     scenario "non-user tries to create a station" do
       visit new_admin_station_path
 
-      expect(page).to have_content("Only admins can create stations")
+      expect(page).to have_content("Only an admin can do that")
     end
 
     scenario "non-admin tries to create a station" do
@@ -48,7 +48,7 @@ feature "admin creates station", %Q{
 
       visit new_admin_station_path
 
-      expect(page).to have_content("Only admins can create stations")
+      expect(page).to have_content("Only an admin can do that")
     end
 
     def sign_in_as(user)
