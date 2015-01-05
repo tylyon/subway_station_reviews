@@ -32,7 +32,7 @@ feature "admin deletes station", %(
       visit admin_station_path(station)
       click_on "Delete"
 
-      expect(page).to have_content("Only admins can delete stations")
+      expect(page).to have_content("Only an admin can do that")
     end
 
     def sign_in_as(user)
