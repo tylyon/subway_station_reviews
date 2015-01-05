@@ -1,12 +1,43 @@
 <%= @station.name %>
 <%= @station.address %>
+
+<% if @review.errors.any? %>
+  <% @review.errors.full_messages.each do |error| %>
+    <%= error %>
+  <% end %>
+<% end %>
+
+<% if !@reviews.nil? %>
 <ul>
-  <% @station.reviews.each do |review| %>
-    <li>
-      <%= review.description %>
-      <%= review.rating %>
-    </li>
+  <% @reviews.each do |review| %>
+  <li>
+    <%= review.description %>
+    <%= review.rating %>
+    <%= link_to "Edit", edit_station_review_path(@station, review) %>
+  </li>
   <% end %>
 </ul>
 
+<% end %>
+
+<%= form_for [@station, @review] do |f| %>
+<div>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+</div>
+
+
+<div>
+  <%= f.label :rating %>
+  <%= f.select(:rating, %w[1 2 3 4], {prompt: 'Rating'}) %>
+</div>
+
+<div>
+  <%= f.submit "Submit" %>
+</div>
+
+<% end %>
+
+
 <%= link_to "Delete", station_path(@station), method: :delete, data: { confirm: 'Are you sure?' } %>
+
