@@ -1,12 +1,10 @@
 <%= @station.name %>
 <%= @station.address %>
 
-<% if !@review.nil? %>
 <% if @review.errors.any? %>
-<% @review.errors.full_messages.each do |error| %>
-<%= error %>
-<% end %>
-<% end %>
+  <% @review.errors.full_messages.each do |error| %>
+    <%= error %>
+  <% end %>
 <% end %>
 
 <% if !@reviews.nil? %>
@@ -28,6 +26,7 @@
   </li>
   <% end %>
 </ul>
+
 <% end %>
 
 <%= form_for [@station, @review] do |f| %>
@@ -47,3 +46,7 @@
 </div>
 
 <% end %>
+
+
+<%= link_to "Delete", station_path(@station), method: :delete, data: { confirm: 'Are you sure?' } %>
+
