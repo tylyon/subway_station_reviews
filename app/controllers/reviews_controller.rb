@@ -37,11 +37,10 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review = Review.find(params[:id])
-    if authenticate_review(@review)
-      @station = @review.station
-      @review.destroy
-      redirect_to station_path(@station)
-    end
+    authenticate_review(@review)
+    @station = @review.station
+    @review.destroy
+    redirect_to station_path(@station)
   end
 
   private

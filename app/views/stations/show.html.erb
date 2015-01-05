@@ -13,7 +13,7 @@
   <li>
     <%= review.description %>
     <%= review.rating %>
-    <% if review.authenticate?(@user) %>
+    <% unless @user.nil? || review.user_id != @user.id %>
       <%= link_to "Edit this review", edit_station_review_path(@station, review) %>
       <%= button_to "Delete",
       review_path(review),
