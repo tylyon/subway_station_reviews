@@ -38,4 +38,3 @@ feature "admin deletes a review", %{
       expect(Review.count).to eq 0
     end
   end
-  
