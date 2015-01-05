@@ -47,7 +47,7 @@ feature "user edits review", %{
 
     visit edit_station_review_path(@review.station, @review)
 
-    expect(page).to have_content("You must log in to edit a review")
+    expect(page).to have_content("You must log in to do that")
   end
 
   scenario "User cannot edit another users review" do
@@ -66,6 +66,6 @@ feature "user edits review", %{
 
     visit edit_station_review_path(@review.station, @review)
 
-    expect(page).to have_content("You must log in to edit a review")
+    expect(page).to have_content("Only the owner for this review can do that")
   end
 end

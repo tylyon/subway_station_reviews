@@ -66,7 +66,7 @@ feature "user creates review", %{
 
       click_button "Submit"
 
-      expect(page).to have_content("You must log in to review a station")
+      expect(page).to have_content("You must log in to do that")
       expect(page).to_not have_content("Review created")
     end
   end
