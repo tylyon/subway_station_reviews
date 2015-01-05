@@ -3,8 +3,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :stations, only: [:index, :show, :new, :create] do
-    resources :reviews, except: [:destroy, :index]
+    resources :reviews, except: [:index, :destroy]
   end
+
+  resources :reviews, only: [:destroy]
 
   namespace :admin do
     resources :stations

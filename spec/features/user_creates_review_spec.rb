@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "user creates review", %Q{
+feature "user creates review", %{
   As a signed in user
   I want to create a review
   So I can inform other people about a station
@@ -21,7 +21,7 @@ feature "user creates review", %Q{
 
     scenario "Creating a review" do
       fill_in "Description", with: "Great place to live and work"
-      select "4", :from => "review[rating]"
+      select "4", from: "review[rating]"
 
       click_button "Submit"
 
@@ -31,7 +31,7 @@ feature "user creates review", %Q{
     end
 
     scenario "User cannot submit blank submission" do
-      select "4", :from => "review[rating]"
+      select "4", from: "review[rating]"
 
       click_button "Submit"
 
