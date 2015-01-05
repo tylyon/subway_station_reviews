@@ -17,7 +17,7 @@ class StationsController < ApplicationController
   def create
     @station = Station.new(station_params)
     if @station.save
-      flash[:notice]="Station created."
+      flash[:notice] = "Station created."
       redirect_to station_path(@station)
     else
       @errors = @station.errors.full_messages
