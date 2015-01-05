@@ -5,6 +5,11 @@ class ReviewsController < ApplicationController
 
   def update
     @review = Review.find(params[:id])
+    if current_user.nil? || @review.user_id != current_user.id
+      flash[:notice] = "You must log in to edit a review"
+      redirect_to station_path(@review.station)
+      return
+    end
     if @review.update_attributes(params[:review].permit(:description, :rating))
       flash[:notice] = "Review edited"
       redirect_to parent
@@ -21,6 +26,13 @@ class ReviewsController < ApplicationController
 
   def create
     @review = parent.reviews.new(review_params)
+
+    if current_user.nil?
+      flash[:notice] = "You must log in to review a station"
+      redirect_to new_user_session_path
+      return
+    end
+
     @review.user_id = current_user.id
 
     if @review.save
@@ -34,6 +46,10 @@ class ReviewsController < ApplicationController
   def edit
     @station = parent
     @review = Review.find(params[:id])
+    if current_user.nil? || @review.user_id != current_user.id
+      flash[:notice] = "You must log in to edit a review"
+      redirect_to station_path(@station)
+    end
   end
 
   def destroy
