@@ -10,13 +10,17 @@ class Admin::StationsController < ApplicationController
 
   def new
     @station = Station.new
-    authenticate_admin
+    if current_user.nil? || current_user.role != "admin"
+      flash[:notice] = "Only admins can create stations"
+      redirect_to stations_path
+    end
   end
 
   def create
     @station = Station.new(station_params)
-    if !authenticate_admin
-      return
+    if current_user.nil? || current_user.role != "admin"
+      flash[:notice] = "Only admins can create stations"
+      redirect_to stations_path
     elsif @station.save
       flash[:notice] = "Station created."
       redirect_to admin_station_path(@station)
@@ -27,8 +31,12 @@ class Admin::StationsController < ApplicationController
   end
 
   def edit
-    authenticate_admin
-    @station = Station.find(params[:id])
+    if current_user.nil? || current_user.role != "admin"
+      flash[:notice] = "Only admins can edit stations"
+      redirect_to stations_path
+    else
+      @station = Station.find(params[:id])
+    end
   end
 
   def update
@@ -47,8 +55,9 @@ class Admin::StationsController < ApplicationController
 
   def destroy
     @station = Station.find(params[:id])
-    if !authenticate_admin
-      return
+    if current_user.nil? || current_user.role != "admin"
+      flash[:notice] = "Only admins can delete stations"
+      redirect_to stations_path
     else
       @station.destroy
       flash[:notice] = "Station deleted"
