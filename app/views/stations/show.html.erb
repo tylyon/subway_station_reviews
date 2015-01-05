@@ -17,6 +17,7 @@
   </li>
   <% end %>
 </ul>
+
 <% end %>
 
 <%= form_for [@station, @review] do |f| %>
@@ -36,3 +37,7 @@
 </div>
 
 <% end %>
+
+
+<%= link_to "Delete", station_path(@station), method: :delete, data: { confirm: 'Are you sure?' } %>
+
