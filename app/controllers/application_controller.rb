@@ -21,9 +21,11 @@ class ApplicationController < ActionController::Base
 
 
   def authenticate_review(review)
-    if current_user.id != review.user_id
+    if current_user.id != review.user_id && current_user.role != "admin"
       flash[:notice] = "Only the owner for this review can do that"
       redirect_to station_path(review.station_id)
+      return false
     end
+    true
   end
 end
