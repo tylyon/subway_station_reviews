@@ -1,5 +1,5 @@
 <%= @station.name %>
-<%= @station.address %>
+<img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @station.latitude + "," + @station.longitude %>&zoom=13&size=600x300&markers=color:red%7Clabel:A%7C<%= @station.latitude + "," + @station.longitude %>">
 
 <% if @review.errors.any? %>
   <% @review.errors.full_messages.each do |error| %>
