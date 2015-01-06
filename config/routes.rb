@@ -4,10 +4,15 @@ Rails.application.routes.draw do
 
   resources :stations, only: [:index, :show, :new, :create] do
     resources :reviews, except: [:index, :destroy] do
-      get '/up-vote', to: 'votes#up_vote', as: :up_vote
-      get '/down-vote', to: 'votes#down_vote', as: :down_vote
     end
   end
+
+  resources :reviews, only: [] do
+    resources :votes, only: [:destroy]
+    get '/up-vote', to: 'votes#up_vote', as: :up_vote
+    get '/down-vote', to: 'votes#down_vote', as: :down_vote
+  end
+
 
   resources :reviews, only: [:destroy]
 

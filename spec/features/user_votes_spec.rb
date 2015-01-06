@@ -11,7 +11,6 @@ feature "User Votes ", %Q{
   } do
     before(:each) do
       user = FactoryGirl.create(:user)
-      station = FactoryGirl.create(:station)
       review = FactoryGirl.create(:review)
 
       visit new_user_session_path
@@ -21,12 +20,12 @@ feature "User Votes ", %Q{
 
       click_button "Log in"
 
-      visit station_path(station)
+      visit station_path(review.station)
     end
 
     scenario 'User votes on review' do
       # figure out voting mechanism on form
-      click "Vote"
+      click_link "up"
 
       expect(page).to have_content("Thanks for your vote")
 
@@ -34,7 +33,8 @@ feature "User Votes ", %Q{
 
     scenario 'User changes vote' do
 
-      click "Change Vote"
+      click_link "up"
+      click_link "down"
 
       expect(page).to have_content("Vote changed")
 
@@ -42,7 +42,8 @@ feature "User Votes ", %Q{
 
     scenario 'User deletes vote' do
 
-      click "Delete Vote"
+      click_link "up"
+      click_on "Delete Vote"
 
       expect(page).to have_content("Vote deleted")
 

@@ -1,5 +1,11 @@
 <div>
-  <div><%= link_to " ", station_review_up_vote(station, review) %></div>
-  <div><strong><%= post.points %></strong></div>
-  <div><%= link_to " ", station_review_down_vote(station, review) %></div>
+  <div><%= link_to "up", review_up_vote_path(review) %></div>
+  <!-- show points -->
+  <div><%= link_to "down", review_down_vote_path(review) %></div>
+  <% vote = Vote.where(user_id: @user.id, review_id: review.id)[0] %>
+  <% if vote %>
+    <%= button_to "Delete Vote", review_vote_path(review, vote.id),
+      method: :delete,
+      data: { confirm: "Are you sure you want to delete this vote?" }%>
+  <% end %>
 </div>

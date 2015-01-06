@@ -11,6 +11,5 @@ class StationsController < ApplicationController
     @review = Review.new
 
     @votes = @review.votes
-    @vote = Vote.new
   end
 end
