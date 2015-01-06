@@ -9,6 +9,11 @@ class Admin::StationsController < ApplicationController
 
   def new
     @station = Station.new
+    # @lines = [[]]
+    # Line.all.each do |line|
+    #   @lines << [line.name, line.id]
+    # end
+    @lines = Line.all
     if current_user.nil? || current_user.role != "admin"
       flash[:notice] = "Only admins can create stations"
       redirect_to stations_path
@@ -21,10 +26,13 @@ class Admin::StationsController < ApplicationController
       flash[:notice] = "Only admins can create stations"
       redirect_to stations_path
     elsif @station.save
+      @connection = Connection.new(station_id: @station.id, line_id: params["line_id"].to_i)
+      @connection.save
       flash[:notice] = "Station created."
       redirect_to admin_station_path(@station)
     else
       @errors = @station.errors.full_messages
+      @lines = Line.all
       render new_admin_station_path
     end
   end
@@ -67,6 +75,6 @@ class Admin::StationsController < ApplicationController
   private
 
   def station_params
-    params.require(:station).permit(:name, :address)
+    params.require(:station).permit(:name, :address, :line)
   end
 end
