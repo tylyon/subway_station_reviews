@@ -25,7 +25,9 @@ feature "admin makes another admin", %{
     scenario "admin gives admin status to a user" do
       click_button "Give admin privileges to #{@user.email}"
 
-      expect(page).to have_content("User #{@user.email} granted admin privileges")
+      expect(page).to have_content(
+        "User #{@user.email} granted admin privileges"
+      )
       expect(User.find(@user.id).role).to eq("admin")
     end
   end
