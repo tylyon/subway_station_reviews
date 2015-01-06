@@ -2,7 +2,7 @@
   <div><%= link_to "up", review_up_vote_path(review) %></div>
   <!-- show points -->
   <div><%= link_to "down", review_down_vote_path(review) %></div>
-  <% vote = Vote.where(user_id: @user.id, review_id: review.id)[0] %>
+  <% vote = Vote.where(user_id: @user.id, review_id: review.id)[0] if @user %>
   <% if vote %>
     <%= button_to "Delete Vote", review_vote_path(review, vote.id),
       method: :delete,
