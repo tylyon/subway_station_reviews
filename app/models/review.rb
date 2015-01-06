@@ -2,9 +2,8 @@ class Review < ActiveRecord::Base
   belongs_to :station
   belongs_to :user
 
-  def authenticate?(current_user)
-    return false if current_user.nil?
-    user.id == current_user.id || current_user.role == "admin"
+  def authenticate?
+    user.id == current_user.id
   end
 
   validates :description, presence: true
