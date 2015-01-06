@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :stations
+    resources :users, only: [:index, :destroy, :update]
   end
 end
