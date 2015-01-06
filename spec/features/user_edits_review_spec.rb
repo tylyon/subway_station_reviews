@@ -34,8 +34,38 @@ feature "user edits review", %{
     select @review.rating, from: "Rating"
 
     click_button "Update"
-        
+
     expect(page).to have_content(@review.rating)
     expect(page).to have_content("Description can't be blank")
+  end
+
+  scenario "Visitor cannot edit a review" do
+    click_link "Sign Out"
+    visit station_path(@review.station)
+
+    expect(page).to_not have_link("Edit this review")
+
+    visit edit_station_review_path(@review.station, @review)
+
+    expect(page).to have_content("You must log in to do that")
+  end
+
+  scenario "User cannot edit another users review" do
+    click_link "Sign Out"
+    user = FactoryGirl.create(:user)
+    visit new_user_session_path
+
+    fill_in "Email", with: user.email
+    fill_in "Password", with: user.password
+
+    click_button "Log in"
+
+    visit station_path(@review.station)
+
+    expect(page).to_not have_link("Edit this review")
+
+    visit edit_station_review_path(@review.station, @review)
+
+    expect(page).to have_content("Only the owner for this review can do that")
   end
 end

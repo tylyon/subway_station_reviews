@@ -3,8 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :stations, only: [:index, :show, :new, :create] do
-    resources :reviews, except: [:index, :destroy] do
-    end
+    resources :reviews, except: [:show, :index, :destroy]
   end
 
   resources :reviews, only: [] do
@@ -18,5 +17,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :stations
+    resources :users, only: [:index, :destroy, :update]
   end
 end

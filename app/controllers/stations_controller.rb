@@ -1,6 +1,7 @@
 class StationsController < ApplicationController
   def index
     @stations = Station.all
+    @lines = Line.all
   end
 
   def show

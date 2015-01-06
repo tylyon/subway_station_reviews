@@ -55,4 +55,18 @@ feature "user creates review", %{
       expect(page).to have_content("Description can't be blank")
       expect(page).to have_content("Rating can't be blank")
     end
+
+    scenario "Visitor cannot create a review" do
+      click_link "Sign Out"
+
+      visit station_path(Station.first)
+
+      fill_in "Description", with: "Great place to live and work"
+      select "4", from: "review[rating]"
+
+      click_button "Submit"
+
+      expect(page).to have_content("You must log in to do that")
+      expect(page).to_not have_content("Review created")
+    end
   end

@@ -1,7 +1,5 @@
 class ReviewsController < ApplicationController
-  def show
-    redirect_to parent
-  end
+  before_action :authenticate
 
   def update
     @review = Review.find(params[:id])
@@ -34,10 +32,12 @@ class ReviewsController < ApplicationController
   def edit
     @station = parent
     @review = Review.find(params[:id])
+    authenticate_review(@review)
   end
 
   def destroy
     @review = Review.find(params[:id])
+    authenticate_review(@review)
     @station = @review.station
     @review.destroy
     redirect_to station_path(@station)

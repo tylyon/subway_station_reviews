@@ -23,10 +23,21 @@ FactoryGirl.define do
     rating 4
   end
 
+
   factory :vote do
     user
     station
     review
   end
-  
+
+
+  factory :line do
+    name "name"
+  end
+
+  factory :connection do
+    station
+    line
+  end
+
 end

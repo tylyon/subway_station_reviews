@@ -2,11 +2,14 @@ class Review < ActiveRecord::Base
   belongs_to :station
   belongs_to :user
   has_many :votes, dependent: :destroy
-
+  validates :user_id, presence: true
+  validates :station_id, presence: true
   validates :description, presence: true
   validates :rating, presence: true
 
-#  mount_uploader :image, ImageUploader
+  def authenticate?
+    user.id == current_user.id
+  end
 
   def up_votes
     self.votes.where(value: 1).count
@@ -15,9 +18,4 @@ class Review < ActiveRecord::Base
   def down_votes
     self.votes.where(value: -1).count
   end
-
-  def points
-    self.votes.sum(:value).to_i
-  end
-
 end
