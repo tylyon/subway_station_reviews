@@ -14,7 +14,6 @@ User.create(
   password_confirmation: "password",
   role: "admin"
   )
-<<<<<<< HEAD
 
 Line.create([
   { name: "Red" },
@@ -109,5 +108,3 @@ create_stations(blue_line_stops, "Blue")
 puts "--------BLUE LINE CREATED--------"
 puts "--------BLUE LINE CREATED--------"
 puts "--------BLUE LINE CREATED--------"
-=======
->>>>>>> master
