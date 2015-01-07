@@ -8,7 +8,7 @@ class StationsController < ApplicationController
     @station = Station.find(params[:id])
     @user = current_user
 
-    @reviews = @station.reviews
+    @reviews = @station.reviews.page params[:page]
     @review = Review.new
 
     @votes = @review.votes

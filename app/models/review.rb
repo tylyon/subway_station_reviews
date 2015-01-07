@@ -18,4 +18,6 @@ class Review < ActiveRecord::Base
   def down_votes
     self.votes.where(value: -1).count
   end
+
+  paginates_per 30
 end
