@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :stations, only: [:index, :show, :new, :create] do
     resources :reviews, except: [:show, :index, :destroy]
+    resources :station_images, only: [:create]
   end
 
   resources :reviews, only: [] do
