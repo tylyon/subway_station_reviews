@@ -3,6 +3,13 @@
 
 <%= @station.address %>
 
+<div>
+  <% @station.station_images.each do |station_image| %>
+  <%= image_tag(station_image.image.url, alt: station_image.description) %>
+  <%= station_image.description %>
+  <% end %>
+</div>
+
 <%= render partial: "reviews/show", locals: { station: @station } %>
 
 <%= form_for [@station, @review] do |f| %>
@@ -23,5 +30,23 @@
 
 <% end %>
 
+<%= form_for [@station, @image] do |f| %>
+<div>
+  <%= f.label :image, "Image" %>
+  <%= f.file_field :image %>
+</div>
+
+<div>
+  <%= f.label :description, "Image Description" %>
+  <%= f.text_field :description %>
+</div>
+
+<%= f.hidden_field :station_id, value: @station.id %>
+
+<div>
+  <%= f.submit "Add photo" %>
+</div>
+
+<% end %>
 
 <%= link_to "Delete", station_path(@station), method: :delete, data: { confirm: 'Are you sure?' } %>

@@ -19,6 +19,8 @@ class StationsController < ApplicationController
     @review = Review.new
 
     @votes = @review.votes
+
+    @image = StationImage.new
   end
 
 end

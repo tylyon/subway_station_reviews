@@ -25,6 +25,7 @@ class ReviewsController < ApplicationController
       flash[:notice] = "Review created"
       redirect_to parent
     else
+      @image = StationImage.new
       render "stations/show"
     end
   end
