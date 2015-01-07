@@ -1,5 +1,5 @@
 <%= @station.name %>
-<img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @station.latitude + "," + @station.longitude %>&zoom=13&size=600x300&markers=color:red%7Clabel:A%7C<%= @station.latitude + "," + @station.longitude %>">
+<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBmaUUgreBb8VainWXdk6ugZ3eroEoEeYw&q=<%= @station.latitude + "," + @station.longitude %>&zoom=18&maptype=satellite"></iframe>
 
 <%= @station.address %>
 
