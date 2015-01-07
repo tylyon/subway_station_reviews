@@ -1,4 +1,6 @@
 <%= @station.name %>
+<img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @station.latitude + "," + @station.longitude %>&zoom=13&size=600x300&markers=color:red%7Clabel:A%7C<%= @station.latitude + "," + @station.longitude %>">
+
 <%= @station.address %>
 
 <% if @review.errors.any? %>
