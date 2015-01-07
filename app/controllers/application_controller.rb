@@ -10,10 +10,22 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authenticate_admin
+    unless current_user && current_user.role == "admin"
+      flash[:notice] = "Only an admin can do that"
+      redirect_to root_path
+      return false
+    end
+    true
+  end
+
+
   def authenticate_review(review)
-    if current_user.id != review.user_id
+    if current_user.id != review.user_id && current_user.role != "admin"
       flash[:notice] = "Only the owner for this review can do that"
       redirect_to station_path(review.station_id)
+      return false
     end
+    true
   end
 end

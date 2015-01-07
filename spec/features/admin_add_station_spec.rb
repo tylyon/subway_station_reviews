@@ -32,6 +32,7 @@ feature "admin creates station", %Q{
     scenario "admin does not fill in inputs" do
       admin = FactoryGirl.create(:admin)
       FactoryGirl.create(:line)
+
       sign_in_as(admin)
 
       visit new_admin_station_path

@@ -2,7 +2,7 @@ require "factory_girl"
 
 FactoryGirl.define do
   factory :user do
-    sequence(:email) {|n| "user#{n}@example.com" }
+    sequence(:email) { |n| "user#{n}@example.com" }
     password "password"
     password_confirmation "password"
   end
@@ -23,6 +23,12 @@ FactoryGirl.define do
     station
     description "description"
     rating 4
+  end
+
+  factory :vote do
+    user
+    station
+    review
   end
 
   factory :line do

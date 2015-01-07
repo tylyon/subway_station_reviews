@@ -9,10 +9,6 @@ class Admin::StationsController < ApplicationController
 
   def new
     @station = Station.new
-    # @lines = [[]]
-    # Line.all.each do |line|
-    #   @lines << [line.name, line.id]
-    # end
     @lines = Line.all
     if current_user.nil? || current_user.role != "admin"
       flash[:notice] = "Only admins can create stations"
