@@ -17,7 +17,6 @@ class StationImagesController < ApplicationController
 
       @votes = @review.votes
 
-      @errors = @image.errors.full_messages
       render "stations/show"
     end
   end
