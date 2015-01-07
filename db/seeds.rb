@@ -108,3 +108,24 @@ create_stations(blue_line_stops, "Blue")
 puts "--------BLUE LINE CREATED--------"
 puts "--------BLUE LINE CREATED--------"
 puts "--------BLUE LINE CREATED--------"
+
+def review_populate(station, description)
+  station = Station.find_by(name: station)
+  review = station.reviews.new(description: description, rating: 1, user_id: 3)
+  if review.save
+    puts "Review for #{station.name} created!"
+  end
+end
+
+i = 500
+until i == 0
+  review_populate("Alewife", "Good#{i}")
+  i -= 1
+end
+
+binding.pry
+
+
+
+
+

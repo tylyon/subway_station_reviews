@@ -12,7 +12,7 @@ class StationImagesController < ApplicationController
       @station = Station.find(params[:station_id])
       @user = current_user
 
-      @reviews = @station.reviews
+      @reviews = @station.reviews.page params[:page]
       @review = Review.new
 
       @votes = @review.votes
