@@ -1,5 +1,4 @@
 class StationImagesController < ApplicationController
-
   def create
     @image = StationImage.new(station_image_params)
 
@@ -21,7 +20,6 @@ class StationImagesController < ApplicationController
       @errors = @image.errors.full_messages
       render "stations/show"
     end
-
   end
 
   private
@@ -29,5 +27,4 @@ class StationImagesController < ApplicationController
   def station_image_params
     params.require(:station_image).permit(:station_id, :image, :description)
   end
-
 end

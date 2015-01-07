@@ -15,5 +15,4 @@ class StationsController < ApplicationController
 
     @image = StationImage.new
   end
-
 end

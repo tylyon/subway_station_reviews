@@ -5,5 +5,4 @@ class StationImage < ActiveRecord::Base
 
   validates :image, presence: true
   validates :station_id, presence: true
-
 end

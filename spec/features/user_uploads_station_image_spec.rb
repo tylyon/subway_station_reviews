@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature 'add photo' do
+feature "add photo" do
   scenario "submit form with valid station photo" do
     station = FactoryGirl.create(:station)
 
@@ -25,5 +25,4 @@ feature 'add photo' do
     expect(page).to have_content("Upload failed")
 
   end
-
 end
