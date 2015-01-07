@@ -37,6 +37,7 @@ class VotesController < ApplicationController
     else # create it
       @vote = current_user.votes.create(value: new_value, review: @review)
       flash[:notice] = "Thanks for your vote"
+      VoteMailer.notification(@vote).deliver
     end
   end
 
