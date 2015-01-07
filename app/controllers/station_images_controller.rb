@@ -2,15 +2,24 @@ class StationImagesController < ApplicationController
 
   def create
     @image = StationImage.new(station_image_params)
-    binding.pry
+
     if @image.save
-      flash[:notice] = "Image added"
+      flash[:notice] = "Image posted"
       redirect_to station_path(@image.station_id)
 
     else
       flash[:notice] = "Upload failed"
+
+      @station = Station.find(params[:station_id])
+      @user = current_user
+
+      @reviews = @station.reviews
+      @review = Review.new
+
+      @votes = @review.votes
+
       @errors = @image.errors.full_messages
-      render station_path(@image.station_id)
+      render "stations/show"
     end
 
   end
@@ -18,7 +27,7 @@ class StationImagesController < ApplicationController
   private
 
   def station_image_params
-    params.require(:station_image).permit(:station_id, :url, :description)
+    params.require(:station_image).permit(:station_id, :image, :description)
   end
 
 end

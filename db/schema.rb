@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20150107155339) do
   end
 
   create_table "station_images", force: :cascade do |t|
-    t.string   "url",         null: false
+    t.string   "image",       null: false
     t.string   "description"
     t.integer  "station_id",  null: false
     t.datetime "created_at",  null: false

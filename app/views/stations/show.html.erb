@@ -3,6 +3,13 @@
 
 <%= @station.address %>
 
+<div>
+  <% @station.station_images.each do |station_image| %>
+  <%= image_tag(station_image.image.url, alt: station_image.description) %>
+  <%= station_image.description %>
+  <% end %>
+</div>
+
 <% if @review.errors.any? %>
   <% @review.errors.full_messages.each do |error| %>
     <%= error %>
@@ -50,14 +57,16 @@
 
 <%= form_for [@station, @image] do |f| %>
 <div>
-  <%= f.label :url, "Image" %>
-  <%= f.file_field :url %>
+  <%= f.label :image, "Image" %>
+  <%= f.file_field :image %>
 </div>
 
 <div>
   <%= f.label :description, "Image Description" %>
   <%= f.text_field :description %>
 </div>
+
+<%= f.hidden_field :station_id, value: @station.id %>
 
 <div>
   <%= f.submit "Add photo" %>

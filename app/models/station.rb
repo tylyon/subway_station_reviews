@@ -2,6 +2,7 @@ class Station < ActiveRecord::Base
   has_many :lines, through: :connection
   has_many :connections
   has_many :reviews
+  has_many :station_images
   validates :name, presence: true
   validates :latitude, presence: true
   validates :longitude, presence: true

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'add photo', focus: true do 
+feature 'add photo' do
   scenario "submit form with valid station photo" do
     station = FactoryGirl.create(:station)
 
@@ -22,8 +22,7 @@ feature 'add photo', focus: true do
 
     click_button "Add photo"
 
-    expect(page).to have_content("No file selected")
-    expect(page).to have_content("Description can't be blank")
+    expect(page).to have_content("Upload failed")
 
   end
 
