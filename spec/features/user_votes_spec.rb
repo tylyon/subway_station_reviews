@@ -23,7 +23,7 @@ feature "User Votes ", %Q{
       visit station_path(@review.station)
     end
 
-    scenario 'User votes on review', focus: true do
+    scenario 'User votes on review' do
       click_link "up"
 
       expect(page).to have_content("Thanks for your vote")
