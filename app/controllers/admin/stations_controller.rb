@@ -18,11 +18,17 @@ class Admin::StationsController < ApplicationController
 
   def create
     @station = Station.new(station_params)
+    location_object = Station.get_lat_lng(@station.address)
+    @station.latitude = location_object.lat
+    @station.longitude = location_object.lng
     if current_user.nil? || current_user.role != "admin"
       flash[:notice] = "Only admins can create stations"
       redirect_to stations_path
     elsif @station.save
-      @connection = Connection.new(station_id: @station.id, line_id: params["line_id"].to_i)
+      @connection = Connection.new(
+        station_id: @station.id,
+        line_id: params["line_id"].to_i
+      )
       @connection.save
       flash[:notice] = "Station created."
       redirect_to admin_station_path(@station)
