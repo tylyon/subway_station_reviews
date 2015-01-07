@@ -1,6 +1,13 @@
 class StationsController < ApplicationController
   def index
-    @stations = Station.all
+    if params[:search]
+      @stations = Station.search(params[:search])
+      if @stations.empty?
+        @error = "Your search returned no results. Try using different keywords."
+      end
+    else
+      @stations = Station.all
+    end
     @lines = Line.all
   end
 
@@ -13,4 +20,5 @@ class StationsController < ApplicationController
 
     @votes = @review.votes
   end
+
 end

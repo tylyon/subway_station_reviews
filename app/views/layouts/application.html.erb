@@ -15,6 +15,10 @@
     </ul>
 
     <section class="top-bar-section">
+    <%= form_tag(stations_path, method: "get") do %>
+      <%= text_field_tag(:search, params[:search], placeholder: "Search Stations") %>
+      <%= submit_tag("Search") %>
+    <% end %>
       <ul class="right">
         <%- if current_user -%>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>

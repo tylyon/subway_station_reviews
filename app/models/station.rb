@@ -10,4 +10,8 @@ class Station < ActiveRecord::Base
   def self.get_lat_lng(address)
     Geokit::Geocoders::GoogleGeocoder.geocode "#{address}"
   end
+
+  def self.search(query)
+    where("name like ?", "%#{query}%")
+  end
 end
