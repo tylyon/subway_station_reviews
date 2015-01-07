@@ -27,7 +27,6 @@ FactoryGirl.define do
 
   factory :vote do
     user
-    station
     review
   end
 
