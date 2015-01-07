@@ -6,4 +6,9 @@ class Station < ActiveRecord::Base
   validates :latitude, presence: true
   validates :longitude, presence: true
   accepts_nested_attributes_for :connections
+
+  def self.get_lat_lng(address)
+    Geokit::Geocoders::GoogleGeocoder.geocode "#{address}"
+  end
+
 end

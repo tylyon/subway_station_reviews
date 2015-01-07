@@ -22,6 +22,9 @@ class Admin::StationsController < ApplicationController
 
   def create
     @station = Station.new(station_params)
+    location_object = Station.get_lat_lng(@station.address)
+    @station.latitude = location_object.lat
+    @station.longitude = location_object.lng
     if current_user.nil? || current_user.role != "admin"
       flash[:notice] = "Only admins can create stations"
       redirect_to stations_path

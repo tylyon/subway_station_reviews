@@ -14,6 +14,8 @@ FactoryGirl.define do
   factory :station do
     name "name"
     address "123 fake st."
+    latitude "45.23981"
+    longitude "23.230238"
   end
 
   factory :review do
