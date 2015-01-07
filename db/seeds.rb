@@ -122,10 +122,3 @@ until i == 0
   review_populate("Alewife", "Good#{i}")
   i -= 1
 end
-
-binding.pry
-
-
-
-
-
