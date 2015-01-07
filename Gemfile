@@ -31,3 +31,4 @@ gem 'foundation-rails'
 gem 'rails_12factor', group: :production
 gem 'openssl'
 gem 'geokit'
+gem 'kaminari'
