@@ -1,6 +1,15 @@
-<% @lines.each do |line| %>
-  <%= line.name %>
-   <% line.stations.each do |station| %>
-    <%= link_to station.name, station_path(station.id) %>
+<%= @error %>
+<div>
+  <% @lines.each do |line| %>
+  <div>
+    <div>
+      <%= line.name %>
+    </div>
+    <% line.stations.each do |station| %>
+      <div>
+        <%= link_to station.name, station_path(station) %>
+      </div>
+    <% end %>
+  </div>
   <% end %>
-<% end %>
+<div>
