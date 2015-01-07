@@ -48,16 +48,14 @@ end
 def create_stations(color_line_stops, line_color)
   color_line_stops.uniq!
   line = Line.find_by(name: line_color)
-  color_line_stops.each{|stop|
+  color_line_stops.each do |stop|
     station = Station.new(stop)
     if station.save
       puts station.name + " created!"
       connection = Connection.new(station_id: station.id, line_id: line.id)
     end
-    if connection.save
-      puts "Connection made!"
-    end
-  }
+    puts "Connection made!" if connection.save
+  end
 end
 
 green_line_route_ids = [
