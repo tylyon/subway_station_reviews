@@ -14,6 +14,7 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'pry-rails'
+  gem 'dotenv-rails'
 end
 
 group :test do
@@ -32,3 +33,4 @@ gem 'rails_12factor', group: :production
 gem 'carrierwave'
 gem 'openssl'
 gem 'geokit'
+gem 'fog'
