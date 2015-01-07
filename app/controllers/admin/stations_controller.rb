@@ -29,7 +29,10 @@ class Admin::StationsController < ApplicationController
       flash[:notice] = "Only admins can create stations"
       redirect_to stations_path
     elsif @station.save
-      @connection = Connection.new(station_id: @station.id, line_id: params["line_id"].to_i)
+      @connection = Connection.new(
+        station_id: @station.id,
+        line_id: params["line_id"].to_i
+      )
       @connection.save
       flash[:notice] = "Station created."
       redirect_to admin_station_path(@station)

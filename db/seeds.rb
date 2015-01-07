@@ -15,29 +15,33 @@ User.create(
   role: "admin"
   )
 
-lines = Line.create([
-  {name: "Red"},
-  {name: "Green"},
-  {name: "Blue"},
-  {name: "Orange"},
-  ])
+Line.create([
+  { name: "Red" },
+  { name: "Green" },
+  { name: "Blue" },
+  { name: "Orange" }
+])
 
-require 'open-uri'
-require 'nokogiri'
-require 'json'
+require "open-uri"
+require "nokogiri"
+require "json"
 
-green_line_stops =[]
-red_line_stops =[]
-orange_line_stops =[]
-blue_line_stops =[]
-silver_line_stops =[]
+green_line_stops = []
+red_line_stops = []
+orange_line_stops = []
+blue_line_stops = []
 
 def grab_stop_names(route_ids, color_line_stops)
   route_ids.each do |route_id|
     routes_by_stop = open("http://realtime.mbta.com/developer/api/v2/stopsbyroute?api_key=wX9NwuHnZU2ToO7GmGR9uw&route=#{route_id}&format=json")
     route_by_stop_data = JSON.load(routes_by_stop)
-    route_by_stop_data["direction"][0]["stop"].each {|stop|
-      color_line_stops << {name: stop["parent_station_name"], latitude: stop["stop_lat"], longitude: stop["stop_lon"]}}
+    route_by_stop_data["direction"][0]["stop"].each do |stop|
+      color_line_stops << {
+        name: stop["parent_station_name"],
+        latitude: stop["stop_lat"],
+        longitude: stop["stop_lon"]
+      }
+    end
   end
 end
 
@@ -106,7 +110,3 @@ create_stations(blue_line_stops, "Blue")
 puts "--------BLUE LINE CREATED--------"
 puts "--------BLUE LINE CREATED--------"
 puts "--------BLUE LINE CREATED--------"
-# route_data = []
-# routes = open("http://realtime.mbta.com/developer/api/v2/routes?api_key=wX9NwuHnZU2ToO7GmGR9uw&format=json")
-# routes.each{|route| route_data << route }
-
