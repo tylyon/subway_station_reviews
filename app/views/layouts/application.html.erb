@@ -2,20 +2,20 @@
 <html>
 <head>
   <title>SubwayStationReviews</title>
-  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= stylesheet_link_tag 'semantic', media: 'all' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-  <nav class="top-bar">
-    <ul class="title-area">
-      <li class="name">
+  <nav>
+    <ul>
+      <li>
         <h1><a href="/">SubwayStationReviews</a></h1>
       </li>
     </ul>
 
-    <section class="top-bar-section">
-      <ul class="right">
+    <section>
+      <ul>
         <li>
           <%= form_tag(stations_path, method: "get") do %>
             <%= text_field_tag(:search, params[:search], placeholder: "Search Stations") %>
@@ -34,17 +34,17 @@
   </nav>
 
   <%- flash.each do |key, value| -%>
-    <div class="flash flash-<%= key %>">
+    <div>
       <%= value %>
     </div>
   <%- end -%>
 
   <%= yield %>
 
-  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'semantic.min' %>
   <%= javascript_tag do %>
     $(function(){
-      $(document).foundation();
+      $(document).semantic();
     });
   <% end %>
   <%= yield :extra_footer %>
