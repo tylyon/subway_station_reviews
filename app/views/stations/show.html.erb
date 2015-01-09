@@ -17,10 +17,10 @@ border: solid 2px rgb(245, 244, 244)
 <%= @station.address %>
 </div>
 
-<div>
+<div class="ui grid">
   <% @station.station_images.each do |station_image| %>
-  <%= image_tag(station_image.image.url, alt: station_image.description) %>
-  <%= station_image.description %>
+      <%= image_tag(station_image.image.url, alt: station_image.description, class: "four wide column" )%>
+      <%= station_image.description %>
   <% end %>
 </div>
 
