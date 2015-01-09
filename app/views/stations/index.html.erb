@@ -1,13 +1,46 @@
 <%= @error %>
-<div>
-  <% @lines.each do |line| %>
-  <div>
-    <div>
-      <%= line.name %>
+    <div class="ui vertical buttons page grid">
+      <a class="ui pointing below label"><h4>
+            THIS<br>
+            REVIEW<br>
+           WAS</h2></a>
+        <div class="ui inverted green toggle button center align" style="padding: 0px;">
+            <h1 style="font-size: 16px;">GOOD</h1>
+        </div>
+        <div class="ui inverted red toggle button" style="padding: 0;">
+            <h1 style="font-size: 16px;">BAD</h1>
+        </div>
     </div>
+
+
+<div class="ui four item menu centered" style = "box-shadow: none;">
+  <a class="red item">
+      <div class="ui red circular label"></div>
+  </a>
+  <a class="green item">
+      <div class="ui green circular label"></div>
+  </a>
+  <a class="blue item">
+      <div class="ui blue circular label"></div>
+  </a>
+  <a class="orange item">
+      <div class="ui orange circular label"></div>
+  </a>
+</div>
+<div>
+ <div class="ui four column grid centered">
+  <% @lines.each do |line| %>
+   <div class="column">
     <% line.stations.each do |station| %>
-      <div>
-        <%= link_to station.name, station_path(station) %>
+       <div class="ui segment centered column grid " style="background: none; box-shadow: none;" >
+            <div class ="column"></div> 
+            <a class="ui <%= line.name.downcase%> circular label">
+</a>
+<!--
+        <div class="ui fluid row" id="circle" style="width: 4px;height: 4px;background: black;-moz-border-radius: 50px;-webkit-border-radius: 50px;border-radius: 50px;">
+</div>
+-->
+         <p class="column"><%= link_to station.name, station_path(station) %></p>
       </div>
     <% end %>
   </div>
