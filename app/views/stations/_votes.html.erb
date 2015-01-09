@@ -1,8 +1,13 @@
-<div>
-  <div><%= link_to "up", review_up_vote_path(review) %></div>
-  <!-- show points -->
-  <div><%= link_to "down", review_down_vote_path(review) %></div>
-  <% vote = Vote.where(user_id: @user.id, review_id: review.id)[0] if @user %>
+
+ 
+<div class="ui vertical buttons page grid item">
+      <a class="ui pointing below label centered"><h4>
+            THIS<br>
+            REVIEW<br>
+           WAS</h4></a>
+        <%= button_to "GOOD", review_up_vote_path(review), class: 'ui inverted green toggle button', style: 'padding: 20px;' %>
+        <%= button_to "BAD", review_up_vote_path(review), class: 'ui inverted red toggle button', style: 'padding: 20px;' %>
+        <% vote = Vote.where(user_id: @user.id, review_id: review.id)[0] if @user %>
   <% if vote %>
     <%= button_to "Delete Vote", review_vote_path(review, vote.id),
       method: :delete,
