@@ -1,16 +1,4 @@
 <%= @error %>
-    <div class="ui vertical buttons page grid">
-      <a class="ui pointing below label"><h4>
-            THIS<br>
-            REVIEW<br>
-           WAS</h2></a>
-        <div class="ui inverted green toggle button center align" style="padding: 0px;">
-            <h1 style="font-size: 16px;">GOOD</h1>
-        </div>
-        <div class="ui inverted red toggle button" style="padding: 0;">
-            <h1 style="font-size: 16px;">BAD</h1>
-        </div>
-    </div>
 
 
 <div class="ui four item menu centered" style = "box-shadow: none;">
@@ -33,7 +21,7 @@
    <div class="column">
     <% line.stations.each do |station| %>
        <div class="ui segment centered column grid " style="background: none; box-shadow: none;" >
-            <div class ="column"></div> 
+            <div class ="column"></div>
             <a class="ui <%= line.name.downcase%> circular label">
 </a>
 <!--
