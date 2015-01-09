@@ -29,7 +29,6 @@ gem 'factory_girl', group: [:development, :test]
 gem 'valid_attribute', group: [:development, :test]
 gem 'shoulda-matchers', group: [:development, :test], require: false
 gem 'devise'
-gem 'semantic'
 gem 'rails_12factor', group: :production
 gem 'carrierwave'
 gem 'openssl'
