@@ -116,9 +116,3 @@ def review_populate(station, description)
     puts "Review for #{station.name} created!"
   end
 end
-
-i = 500
-until i == 0
-  review_populate("Alewife", "Good#{i}")
-  i -= 1
-end
