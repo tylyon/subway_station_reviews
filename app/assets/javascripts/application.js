@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //= require semantic.min
 //= require_tree .
+//= require subway_menu
