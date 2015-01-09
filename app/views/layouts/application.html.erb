@@ -1,47 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SubwayStationReviews</title>
+  <title>sTaTion!</title>
   <%= stylesheet_link_tag 'semantic', media: 'all' %>
+  <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-  <nav>
-    <ul>
-      <li>
-        <h1><a href="/">SubwayStationReviews</a></h1>
-      </li>
-    </ul>
-
-    <section>
-      <ul>
-        <li>
+  <nav class="ui menu">
+      <div class="item"><h1><a href="/">sTaTion!</a></h1>
+        <% if current_user %>
+          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "ui red button"%>
+          <%= link_to 'User Settings', edit_user_registration_path, method: :get, class: "ui blue button" %>
+        <% else %>
+          <%= link_to 'Sign Up', new_user_registration_path, class: "ui inverted green button" %>
+          <%= link_to 'Sign In', new_user_session_path, class: "ui inverted blue button" %>
+        <% end %>
+      </div>
+      <div class="right menu">
+      <div class="item">
+        <div class="ui form">
           <%= form_tag(stations_path, method: "get") do %>
+          <div class="field">
             <%= text_field_tag(:search, params[:search], placeholder: "Search Stations") %>
-            <%= submit_tag("Search") %>
+          </div>
+          <%= submit_tag "Search", class: "ui black button" %>
           <% end %>
-        </li>
-        <%- if current_user -%>
-          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-          <li><%= link_to 'User Settings', edit_user_registration_path, method: :get %></li>
-        <%- else -%>
-          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-          <li><%= link_to 'Sign In', new_user_session_path %></li>
-        <%- end -%>
-      </ul>
-    </section>
+        </div>
+      </div>
+    </div>
   </nav>
 
   <%- flash.each do |key, value| -%>
-    <div>
+    <div class="ui message red">
       <%= value %>
     </div>
   <%- end -%>
-
-  <%= yield %>
-
-  <%= javascript_include_tag 'semantic.min' %>
+  <div>
+    <%= yield %>
+  </div>
+  <%= javascript_include_tag 'semantic' %>
   <%= javascript_tag do %>
     $(function(){
       $(document).semantic();
