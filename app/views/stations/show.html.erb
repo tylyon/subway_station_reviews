@@ -1,7 +1,22 @@
+<div class="overlay" onClick="style.pointerEvents='none'"></div>
+<iframe width="100%" height="150" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBmaUUgreBb8VainWXdk6ugZ3eroEoEeYw&q=<%= @station.latitude + "," + @station.longitude %>&zoom=18&maptype=satellite"></iframe>
+<div class="ui card header description" style="
+    position: absolute;
+    right: 0;
+    top: 124px;
+    padding: .5% 0% .5% 2%;
+    box-shadow: inset 5px 5px 4px rgba(255, 255, 255, 0), inset -5px -5px 4px rgba(247, 247, 247, 0.06);
+    /* z-index: -1; */
+    background: rgb(247, 247, 247);
+    color: rgba(221, 211, 211, 0.25);
+    text-shadow: 0px 0px 0px rgba(160, 149, 149, 0.25), 3px 1px 1px rgba(255, 255, 255, 1), 0px 0px 0px rgba(5, 4, 4, 0.22), 0px 0px 0px rgba(0, 0, 0, 0.05);
+    font-size: large;
+    border-radius: 2px;
+border: solid 2px rgb(245, 244, 244)
+">
 <%= @station.name %>
-<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBmaUUgreBb8VainWXdk6ugZ3eroEoEeYw&q=<%= @station.latitude + "," + @station.longitude %>&zoom=18&maptype=satellite"></iframe>
-
 <%= @station.address %>
+</div>
 
 <div>
   <% @station.station_images.each do |station_image| %>
@@ -11,42 +26,68 @@
 </div>
 
 <%= render partial: "reviews/show", locals: { station: @station } %>
+<div class="ui card" style="
+width: 96%;
+margin: 1%;
+padding: 3%;"
+>
+<div class="ui fluid form" style="width: 100%;display: inline-block;padding: 0%;">
+  <%= form_for [@station, @review] do |f| %>
+    <div style="
+    position: absolute;
+    width: 100%;
+    top: 0;
+    right: 0;"
+>
+    <div class="ui poiting below label" style="
+    font-size: 14px;
+    padding: 1% 9% 1% 9%;
+    position: absolute;
+    background: rgb(247, 247, 247);
+    border: 1px solid rgb(226, 227, 227);
+    color: rgba(179, 163, 163, 1);
+    text-shadow: none;
+    font-weight: 100;
+    font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+" >
+    <%= f.label :description %>
+    </div>
 
-<%= form_for [@station, @review] do |f| %>
-<div>
-  <%= f.label :description %>
-  <%= f.text_area :description %>
+    <%= f.text_area :description, style: "padding-top: 4%;", placeholder: "Enter a description"
+ %>
+    </div>
+
+    <div class="ui selection dropdown" style="
+    position: absolute;
+    right: 0;
+    top: 0px;">
+      <input type="hidden" name="rating">
+      <div class="default text">Rating</div>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <div class="item" data-value="1">1</div>
+        <div class="item" data-value="2">2</div>
+        <div class="item" data-value="3">3</div>
+        <div class="item" data-value="4">4</div>
+      </div>
+    </div>
+    <%= f.submit "Submit" %>
+  <% end %>
 </div>
 
-
-<div>
-  <%= f.label :rating %>
-  <%= f.select(:rating, %w[1 2 3 4], {prompt: 'Rating'}) %>
+<div class="ui card form" style="
+    width: 100%;
+    padding: 3%;
+">
+  <%= form_for [@station, @image] do |f| %>
+    <%= f.label :image, "Image" %>
+    <%= f.file_field :image %>
+    <%= f.label :description, "Image Description" %>
+    <%= f.text_field :description %>
+    <%= f.hidden_field :station_id, value: @station.id %>
+    <%= f.submit "Add photo" %>
+  <% end %>
 </div>
-
-<div>
-  <%= f.submit "Submit" %>
 </div>
-
-<% end %>
-
-<%= form_for [@station, @image] do |f| %>
-<div>
-  <%= f.label :image, "Image" %>
-  <%= f.file_field :image %>
-</div>
-
-<div>
-  <%= f.label :description, "Image Description" %>
-  <%= f.text_field :description %>
-</div>
-
-<%= f.hidden_field :station_id, value: @station.id %>
-
-<div>
-  <%= f.submit "Add photo" %>
-</div>
-
-<% end %>
 
 <%= link_to "Delete", station_path(@station), method: :delete, data: { confirm: 'Are you sure?' } %>

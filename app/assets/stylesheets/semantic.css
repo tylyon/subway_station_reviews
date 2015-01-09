@@ -17,6 +17,19 @@
 
 /* Border-Box */
 
+.overlay {
+   background:transparent;
+   position:relative;
+   width:640px;
+   height:480px; /* your iframe height */
+   top:480px;  /* your iframe height */
+   margin-top:-480px;  /* your iframe height */
+}
+
+.new_review {
+  margin: 3% 2% 0% 2%;
+}
+
 *,
 *:before,
 *:after {
